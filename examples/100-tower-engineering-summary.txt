@@ -1,0 +1,280 @@
+HYDROTOWER · PRELIMINARY ENGINEERING SUMMARY
+100-tower pilot farm
+Generated: 2026-10-25T12:08:52.275Z
+
+DESIGN BASIS
+Room: 10 × 10 m (100 m²)
+Towers: 100; default height 3 m; body diameter 200 mm
+Demand: 50.00 L/min; individual targets are scenario inputs, not crop recommendations.
+Mode: recirculating; 1 distribution manifold(s)
+Main: nominal 32 mm; actual entered ID 27.2 mm
+Branch ID 20 mm; lateral ID 6 mm
+Water: density 998.2 kg/m³, kinematic viscosity 1.004e-6 m²/s (20 °C)
+
+PUMP DATA & PROVENANCE
+Model: INGCO CPM7508; 1 pump(s), parallel
+Single-pump limits: 110 L/min maximum flow, 30 m maximum head.
+These limits are NOT simultaneously achievable operating values.
+Default CPM7508 rating: 750 W / 1 HP, 220–240 V, 50 Hz; manufacturer catalog corroborates flow/head/input rating.
+User-supplied maximum suction lift: 8 m. Configured lift: 0 m. NPSH not calculated.
+Catalog: https://ingco.com.pa/bombas/
+Curve source: ILLUSTRATIVE ENGINEERING ESTIMATE. H = Hmax × (1 − (Q/Qmax)²). Endpoints do not establish the true curve. No invented point is manufacturer data.
+
+
+PREDICTED OPERATING POINT (UNVALIDATED ESTIMATE)
+Supply: 98.42 L/min / 5905 L/hour
+Pump differential head: 5.980 m; differential pressure equivalent 58.54 kPa
+Flow-weighted static contribution: 3.000 m (tallest tower: 3.000 m)
+Flow-weighted friction / fitting contributions: 1.747 / 1.234 m
+Energy budget residual: 9.033e-10 m
+Pump hydraulic power: 96.0 W
+Assumed wire-to-water efficiency: not provided
+Estimated electrical input: UNKNOWN
+Schedule: 16 hours/day (steady on-state; startup transients not simulated)
+Estimated electrical energy: UNKNOWN; enter an efficiency
+Separate rated-input scenario: 12.00 kWh/day; not measured consumption.
+Targets met: 100.0% of towers
+Lowest/highest tower flow: 0.796 / 1.286 L/min
+Range imbalance (max−min)/mean: 49.8%
+Closest/farthest by floor-plan distance from the pump: 1.120 / 0.796 L/min
+Projected reservoir return: 98.42 L/min; estimated gravity capacity 173.43 L/min
+Supply and projected return balance; neglecting uptake, evaporation and leaks.
+
+FORMULAS & SOLVER
+SI units internally: Q in m³/s, D and L in metres; inputs/outputs convert explicitly.
+v = Q / (πD²/4); Re = vD/ν
+Darcy–Weisbach: hf = f(L/D)v²/(2g)
+f = 64/Re below Re 2000; Swamee–Jain above Re 4000; linear transition between.
+Minor loss hm = ΣK v²/(2g); elbow K=0.9, tee K=0.6, valve K=0.2 (editable extra K).
+Pressure p = ρg(H−z); hydraulic power = ρgQHpump
+Electrical power = hydraulic power / entered wire-to-water efficiency.
+Identical series pumps add heads at equal Q; parallel pumps add flow at equal H.
+Damped nodal Newton iterations enforce ΣQ=0 at each junction, then head bisection finds Hpump(Q)=Hsystem(Q).
+Maximum junction residual: 1.281e-12 m³/s; final network iterations: 5.
+Default rows are lumped branches with individual length-dependent laterals; no equal-flow constraint.
+Atmospheric return loses pressure recovery; count tower rise once, not twice. A sealed loop includes a common return resistance with zero net static rise.
+Gravity return is a full-bore Darcy capacity estimate from the entered drop, not a partially filled drainage calculation.
+Hydraulic reference: https://usepa.github.io/EPANET2.2/3_network_model.html
+
+WARNINGS & ASSUMPTIONS
+• Manufacturer curve missing. Operating point is an illustrative estimate from H = Hmax × (1 − (Q/Qmax)²), not a validated INGCO performance curve.
+• 1 pipe segments have velocity outside 0.1–2 m/s.
+• Unverified: lumped row manifolds, nozzle K, pipe dimensions, fitting coefficients, 20 °C water, and full-bore gravity return estimate. Validate with field measurements.
+Nominal diameter is a label. Actual ID drives all calculations. PVC SDR presets are dimensional estimates, not certified pipe schedules.
+No plant uptake, evaporation, nutrient viscosity correction, transient/water-hammer, pump minimum-flow, NPSH, clogging, reservoir level dynamics or thermal model.
+This is a preliminary design aid. Field measurements and manufacturer engineering data are required before construction or pump selection.
+
+PIPE RESULTS (SIGNED FLOWS FOLLOW FROM→TO)
+Main 1 · nominal 32 mm [main0] pump → M0: Q=98.418 L/min, v=2.823 m/s, hf=0.860 m, hm=0.975 m, Δp=17.965 kPa, entrance p=58.541 kPa
+Branch 1 [branch0] M0 → R0: Q=9.539 L/min, v=0.506 m/s, hf=0.186 m, hm=0.031 m, Δp=2.132 kPa, entrance p=40.576 kPa
+Lateral T001 [inlet-T001] R0 → T001: Q=1.191 L/min, v=0.702 m/s, hf=0.616 m, hm=0.312 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Lateral T002 [inlet-T002] R0 → T002: Q=1.111 L/min, v=0.655 m/s, hf=0.656 m, hm=0.271 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Lateral T003 [inlet-T003] R0 → T003: Q=1.055 L/min, v=0.622 m/s, hf=0.683 m, hm=0.244 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Lateral T004 [inlet-T004] R0 → T004: Q=1.007 L/min, v=0.594 m/s, hf=0.704 m, hm=0.223 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Lateral T005 [inlet-T005] R0 → T005: Q=0.967 L/min, v=0.570 m/s, hf=0.722 m, hm=0.205 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Lateral T006 [inlet-T006] R0 → T006: Q=0.892 L/min, v=0.526 m/s, hf=0.753 m, hm=0.175 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Lateral T007 [inlet-T007] R0 → T007: Q=0.864 L/min, v=0.509 m/s, hf=0.763 m, hm=0.164 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Lateral T008 [inlet-T008] R0 → T008: Q=0.839 L/min, v=0.495 m/s, hf=0.773 m, hm=0.155 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Lateral T009 [inlet-T009] R0 → T009: Q=0.817 L/min, v=0.481 m/s, hf=0.781 m, hm=0.147 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Lateral T010 [inlet-T010] R0 → T010: Q=0.796 L/min, v=0.469 m/s, hf=0.788 m, hm=0.139 m, Δp=9.077 kPa, entrance p=38.444 kPa
+Branch 2 [branch1] M0 → R1: Q=9.603 L/min, v=0.509 m/s, hf=0.172 m, hm=0.032 m, Δp=1.996 kPa, entrance p=40.576 kPa
+Lateral T011 [inlet-T011] R1 → T011: Q=1.201 L/min, v=0.708 m/s, hf=0.624 m, hm=0.317 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Lateral T012 [inlet-T012] R1 → T012: Q=1.118 L/min, v=0.659 m/s, hf=0.666 m, hm=0.275 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Lateral T013 [inlet-T013] R1 → T013: Q=1.062 L/min, v=0.626 m/s, hf=0.694 m, hm=0.248 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Lateral T014 [inlet-T014] R1 → T014: Q=1.014 L/min, v=0.598 m/s, hf=0.715 m, hm=0.226 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Lateral T015 [inlet-T015] R1 → T015: Q=0.973 L/min, v=0.573 m/s, hf=0.733 m, hm=0.208 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Lateral T016 [inlet-T016] R1 → T016: Q=0.898 L/min, v=0.529 m/s, hf=0.764 m, hm=0.177 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Lateral T017 [inlet-T017] R1 → T017: Q=0.870 L/min, v=0.513 m/s, hf=0.775 m, hm=0.166 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Lateral T018 [inlet-T018] R1 → T018: Q=0.845 L/min, v=0.498 m/s, hf=0.784 m, hm=0.157 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Lateral T019 [inlet-T019] R1 → T019: Q=0.822 L/min, v=0.485 m/s, hf=0.793 m, hm=0.148 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Lateral T020 [inlet-T020] R1 → T020: Q=0.801 L/min, v=0.472 m/s, hf=0.800 m, hm=0.141 m, Δp=9.213 kPa, entrance p=38.580 kPa
+Branch 3 [branch2] M0 → R2: Q=9.668 L/min, v=0.513 m/s, hf=0.158 m, hm=0.032 m, Δp=1.858 kPa, entrance p=40.576 kPa
+Lateral T021 [inlet-T021] R2 → T021: Q=1.211 L/min, v=0.714 m/s, hf=0.633 m, hm=0.322 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Lateral T022 [inlet-T022] R2 → T022: Q=1.125 L/min, v=0.663 m/s, hf=0.677 m, hm=0.278 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Lateral T023 [inlet-T023] R2 → T023: Q=1.069 L/min, v=0.630 m/s, hf=0.704 m, hm=0.251 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Lateral T024 [inlet-T024] R2 → T024: Q=1.021 L/min, v=0.602 m/s, hf=0.727 m, hm=0.229 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Lateral T025 [inlet-T025] R2 → T025: Q=0.979 L/min, v=0.577 m/s, hf=0.745 m, hm=0.211 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Lateral T026 [inlet-T026] R2 → T026: Q=0.903 L/min, v=0.533 m/s, hf=0.776 m, hm=0.179 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Lateral T027 [inlet-T027] R2 → T027: Q=0.876 L/min, v=0.516 m/s, hf=0.787 m, hm=0.168 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Lateral T028 [inlet-T028] R2 → T028: Q=0.850 L/min, v=0.501 m/s, hf=0.796 m, hm=0.159 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Lateral T029 [inlet-T029] R2 → T029: Q=0.827 L/min, v=0.488 m/s, hf=0.805 m, hm=0.150 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Lateral T030 [inlet-T030] R2 → T030: Q=0.806 L/min, v=0.475 m/s, hf=0.812 m, hm=0.143 m, Δp=9.351 kPa, entrance p=38.718 kPa
+Branch 4 [branch3] M0 → R3: Q=9.733 L/min, v=0.516 m/s, hf=0.143 m, hm=0.033 m, Δp=1.716 kPa, entrance p=40.576 kPa
+Lateral T031 [inlet-T031] R3 → T031: Q=1.221 L/min, v=0.720 m/s, hf=0.642 m, hm=0.328 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Lateral T032 [inlet-T032] R3 → T032: Q=1.133 L/min, v=0.668 m/s, hf=0.688 m, hm=0.282 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Lateral T033 [inlet-T033] R3 → T033: Q=1.076 L/min, v=0.634 m/s, hf=0.716 m, hm=0.254 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Lateral T034 [inlet-T034] R3 → T034: Q=1.027 L/min, v=0.605 m/s, hf=0.738 m, hm=0.232 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Lateral T035 [inlet-T035] R3 → T035: Q=0.986 L/min, v=0.581 m/s, hf=0.756 m, hm=0.213 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Lateral T036 [inlet-T036] R3 → T036: Q=0.909 L/min, v=0.536 m/s, hf=0.788 m, hm=0.182 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Lateral T037 [inlet-T037] R3 → T037: Q=0.881 L/min, v=0.519 m/s, hf=0.799 m, hm=0.171 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Lateral T038 [inlet-T038] R3 → T038: Q=0.856 L/min, v=0.505 m/s, hf=0.809 m, hm=0.161 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Lateral T039 [inlet-T039] R3 → T039: Q=0.833 L/min, v=0.491 m/s, hf=0.817 m, hm=0.152 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Lateral T040 [inlet-T040] R3 → T040: Q=0.812 L/min, v=0.478 m/s, hf=0.825 m, hm=0.145 m, Δp=9.493 kPa, entrance p=38.860 kPa
+Branch 5 [branch4] M0 → R4: Q=9.801 L/min, v=0.520 m/s, hf=0.127 m, hm=0.033 m, Δp=1.571 kPa, entrance p=40.576 kPa
+Lateral T041 [inlet-T041] R4 → T041: Q=1.232 L/min, v=0.726 m/s, hf=0.651 m, hm=0.333 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Lateral T042 [inlet-T042] R4 → T042: Q=1.142 L/min, v=0.673 m/s, hf=0.698 m, hm=0.286 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Lateral T043 [inlet-T043] R4 → T043: Q=1.083 L/min, v=0.638 m/s, hf=0.727 m, hm=0.257 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Lateral T044 [inlet-T044] R4 → T044: Q=1.034 L/min, v=0.609 m/s, hf=0.750 m, hm=0.235 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Lateral T045 [inlet-T045] R4 → T045: Q=0.992 L/min, v=0.585 m/s, hf=0.768 m, hm=0.216 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Lateral T046 [inlet-T046] R4 → T046: Q=0.915 L/min, v=0.540 m/s, hf=0.801 m, hm=0.184 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Lateral T047 [inlet-T047] R4 → T047: Q=0.887 L/min, v=0.523 m/s, hf=0.812 m, hm=0.173 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Lateral T048 [inlet-T048] R4 → T048: Q=0.862 L/min, v=0.508 m/s, hf=0.822 m, hm=0.163 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Lateral T049 [inlet-T049] R4 → T049: Q=0.838 L/min, v=0.494 m/s, hf=0.830 m, hm=0.154 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Lateral T050 [inlet-T050] R4 → T050: Q=0.817 L/min, v=0.482 m/s, hf=0.838 m, hm=0.147 m, Δp=9.638 kPa, entrance p=39.005 kPa
+Branch 6 [branch5] M0 → R5: Q=9.871 L/min, v=0.524 m/s, hf=0.112 m, hm=0.034 m, Δp=1.423 kPa, entrance p=40.576 kPa
+Lateral T051 [inlet-T051] R5 → T051: Q=1.242 L/min, v=0.732 m/s, hf=0.661 m, hm=0.339 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Lateral T052 [inlet-T052] R5 → T052: Q=1.152 L/min, v=0.679 m/s, hf=0.708 m, hm=0.291 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Lateral T053 [inlet-T053] R5 → T053: Q=1.090 L/min, v=0.642 m/s, hf=0.739 m, hm=0.261 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Lateral T054 [inlet-T054] R5 → T054: Q=1.041 L/min, v=0.614 m/s, hf=0.762 m, hm=0.238 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Lateral T055 [inlet-T055] R5 → T055: Q=0.999 L/min, v=0.589 m/s, hf=0.781 m, hm=0.219 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Lateral T056 [inlet-T056] R5 → T056: Q=0.921 L/min, v=0.543 m/s, hf=0.813 m, hm=0.186 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Lateral T057 [inlet-T057] R5 → T057: Q=0.893 L/min, v=0.526 m/s, hf=0.825 m, hm=0.175 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Lateral T058 [inlet-T058] R5 → T058: Q=0.867 L/min, v=0.511 m/s, hf=0.835 m, hm=0.165 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Lateral T059 [inlet-T059] R5 → T059: Q=0.844 L/min, v=0.497 m/s, hf=0.843 m, hm=0.156 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Lateral T060 [inlet-T060] R5 → T060: Q=0.822 L/min, v=0.485 m/s, hf=0.851 m, hm=0.149 m, Δp=9.787 kPa, entrance p=39.154 kPa
+Branch 7 [branch6] M0 → R6: Q=9.942 L/min, v=0.527 m/s, hf=0.096 m, hm=0.034 m, Δp=1.271 kPa, entrance p=40.576 kPa
+Lateral T061 [inlet-T061] R6 → T061: Q=1.253 L/min, v=0.739 m/s, hf=0.670 m, hm=0.345 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Lateral T062 [inlet-T062] R6 → T062: Q=1.162 L/min, v=0.685 m/s, hf=0.719 m, hm=0.296 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Lateral T063 [inlet-T063] R6 → T063: Q=1.097 L/min, v=0.647 m/s, hf=0.751 m, hm=0.264 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Lateral T064 [inlet-T064] R6 → T064: Q=1.048 L/min, v=0.618 m/s, hf=0.774 m, hm=0.241 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Lateral T065 [inlet-T065] R6 → T065: Q=1.005 L/min, v=0.593 m/s, hf=0.793 m, hm=0.222 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Lateral T066 [inlet-T066] R6 → T066: Q=0.928 L/min, v=0.547 m/s, hf=0.826 m, hm=0.189 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Lateral T067 [inlet-T067] R6 → T067: Q=0.899 L/min, v=0.530 m/s, hf=0.838 m, hm=0.178 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Lateral T068 [inlet-T068] R6 → T068: Q=0.873 L/min, v=0.515 m/s, hf=0.848 m, hm=0.167 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Lateral T069 [inlet-T069] R6 → T069: Q=0.850 L/min, v=0.501 m/s, hf=0.857 m, hm=0.159 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Lateral T070 [inlet-T070] R6 → T070: Q=0.828 L/min, v=0.488 m/s, hf=0.865 m, hm=0.151 m, Δp=9.939 kPa, entrance p=39.306 kPa
+Branch 8 [branch7] M0 → R7: Q=10.014 L/min, v=0.531 m/s, hf=0.079 m, hm=0.035 m, Δp=1.115 kPa, entrance p=40.576 kPa
+Lateral T071 [inlet-T071] R7 → T071: Q=1.264 L/min, v=0.745 m/s, hf=0.680 m, hm=0.351 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Lateral T072 [inlet-T072] R7 → T072: Q=1.172 L/min, v=0.691 m/s, hf=0.730 m, hm=0.302 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Lateral T073 [inlet-T073] R7 → T073: Q=1.105 L/min, v=0.651 m/s, hf=0.763 m, hm=0.268 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Lateral T074 [inlet-T074] R7 → T074: Q=1.055 L/min, v=0.622 m/s, hf=0.787 m, hm=0.244 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Lateral T075 [inlet-T075] R7 → T075: Q=1.012 L/min, v=0.597 m/s, hf=0.806 m, hm=0.225 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Lateral T076 [inlet-T076] R7 → T076: Q=0.934 L/min, v=0.550 m/s, hf=0.840 m, hm=0.192 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Lateral T077 [inlet-T077] R7 → T077: Q=0.905 L/min, v=0.533 m/s, hf=0.851 m, hm=0.180 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Lateral T078 [inlet-T078] R7 → T078: Q=0.879 L/min, v=0.518 m/s, hf=0.862 m, hm=0.170 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Lateral T079 [inlet-T079] R7 → T079: Q=0.855 L/min, v=0.504 m/s, hf=0.871 m, hm=0.161 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Lateral T080 [inlet-T080] R7 → T080: Q=0.834 L/min, v=0.491 m/s, hf=0.879 m, hm=0.153 m, Δp=10.095 kPa, entrance p=39.462 kPa
+Branch 9 [branch8] M0 → R8: Q=10.087 L/min, v=0.535 m/s, hf=0.062 m, hm=0.035 m, Δp=0.955 kPa, entrance p=40.576 kPa
+Lateral T081 [inlet-T081] R8 → T081: Q=1.275 L/min, v=0.752 m/s, hf=0.690 m, hm=0.357 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Lateral T082 [inlet-T082] R8 → T082: Q=1.182 L/min, v=0.697 m/s, hf=0.741 m, hm=0.307 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Lateral T083 [inlet-T083] R8 → T083: Q=1.112 L/min, v=0.656 m/s, hf=0.776 m, hm=0.272 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Lateral T084 [inlet-T084] R8 → T084: Q=1.062 L/min, v=0.626 m/s, hf=0.800 m, hm=0.248 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Lateral T085 [inlet-T085] R8 → T085: Q=1.019 L/min, v=0.601 m/s, hf=0.819 m, hm=0.228 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Lateral T086 [inlet-T086] R8 → T086: Q=0.940 L/min, v=0.554 m/s, hf=0.853 m, hm=0.194 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Lateral T087 [inlet-T087] R8 → T087: Q=0.911 L/min, v=0.537 m/s, hf=0.865 m, hm=0.182 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Lateral T088 [inlet-T088] R8 → T088: Q=0.885 L/min, v=0.522 m/s, hf=0.876 m, hm=0.172 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Lateral T089 [inlet-T089] R8 → T089: Q=0.861 L/min, v=0.508 m/s, hf=0.885 m, hm=0.163 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Lateral T090 [inlet-T090] R8 → T090: Q=0.839 L/min, v=0.495 m/s, hf=0.893 m, hm=0.155 m, Δp=10.255 kPa, entrance p=39.622 kPa
+Branch 10 [branch9] M0 → R9: Q=10.161 L/min, v=0.539 m/s, hf=0.045 m, hm=0.036 m, Δp=0.791 kPa, entrance p=40.576 kPa
+Lateral T091 [inlet-T091] R9 → T091: Q=1.286 L/min, v=0.758 m/s, hf=0.701 m, hm=0.363 m, Δp=10.419 kPa, entrance p=39.786 kPa
+Lateral T092 [inlet-T092] R9 → T092: Q=1.193 L/min, v=0.703 m/s, hf=0.752 m, hm=0.312 m, Δp=10.419 kPa, entrance p=39.786 kPa
+Lateral T093 [inlet-T093] R9 → T093: Q=1.120 L/min, v=0.660 m/s, hf=0.789 m, hm=0.275 m, Δp=10.419 kPa, entrance p=39.786 kPa
+Lateral T094 [inlet-T094] R9 → T094: Q=1.069 L/min, v=0.630 m/s, hf=0.813 m, hm=0.251 m, Δp=10.419 kPa, entrance p=39.786 kPa
+Lateral T095 [inlet-T095] R9 → T095: Q=1.026 L/min, v=0.605 m/s, hf=0.833 m, hm=0.231 m, Δp=10.419 kPa, entrance p=39.786 kPa
+Lateral T096 [inlet-T096] R9 → T096: Q=0.947 L/min, v=0.558 m/s, hf=0.867 m, hm=0.197 m, Δp=10.419 kPa, entrance p=39.786 kPa
+Lateral T097 [inlet-T097] R9 → T097: Q=0.917 L/min, v=0.541 m/s, hf=0.879 m, hm=0.185 m, Δp=10.419 kPa, entrance p=39.786 kPa
+Lateral T098 [inlet-T098] R9 → T098: Q=0.891 L/min, v=0.525 m/s, hf=0.890 m, hm=0.174 m, Δp=10.419 kPa, entrance p=39.786 kPa
+Lateral T099 [inlet-T099] R9 → T099: Q=0.867 L/min, v=0.511 m/s, hf=0.899 m, hm=0.165 m, Δp=10.419 kPa, entrance p=39.786 kPa
+Lateral T100 [inlet-T100] R9 → T100: Q=0.845 L/min, v=0.498 m/s, hf=0.907 m, hm=0.157 m, Δp=10.419 kPa, entrance p=39.786 kPa
+
+INDIVIDUAL TOWER RESULTS
+T001: target 0.500 L/min, delivered 1.191 L/min, inlet 0.000 kPa gauge, MEETS target
+T002: target 0.500 L/min, delivered 1.111 L/min, inlet 0.000 kPa gauge, MEETS target
+T003: target 0.500 L/min, delivered 1.055 L/min, inlet 0.000 kPa gauge, MEETS target
+T004: target 0.500 L/min, delivered 1.007 L/min, inlet 0.000 kPa gauge, MEETS target
+T005: target 0.500 L/min, delivered 0.967 L/min, inlet 0.000 kPa gauge, MEETS target
+T006: target 0.500 L/min, delivered 0.892 L/min, inlet 0.000 kPa gauge, MEETS target
+T007: target 0.500 L/min, delivered 0.864 L/min, inlet 0.000 kPa gauge, MEETS target
+T008: target 0.500 L/min, delivered 0.839 L/min, inlet 0.000 kPa gauge, MEETS target
+T009: target 0.500 L/min, delivered 0.817 L/min, inlet 0.000 kPa gauge, MEETS target
+T010: target 0.500 L/min, delivered 0.796 L/min, inlet 0.000 kPa gauge, MEETS target
+T011: target 0.500 L/min, delivered 1.201 L/min, inlet 0.000 kPa gauge, MEETS target
+T012: target 0.500 L/min, delivered 1.118 L/min, inlet 0.000 kPa gauge, MEETS target
+T013: target 0.500 L/min, delivered 1.062 L/min, inlet 0.000 kPa gauge, MEETS target
+T014: target 0.500 L/min, delivered 1.014 L/min, inlet 0.000 kPa gauge, MEETS target
+T015: target 0.500 L/min, delivered 0.973 L/min, inlet 0.000 kPa gauge, MEETS target
+T016: target 0.500 L/min, delivered 0.898 L/min, inlet 0.000 kPa gauge, MEETS target
+T017: target 0.500 L/min, delivered 0.870 L/min, inlet 0.000 kPa gauge, MEETS target
+T018: target 0.500 L/min, delivered 0.845 L/min, inlet 0.000 kPa gauge, MEETS target
+T019: target 0.500 L/min, delivered 0.822 L/min, inlet 0.000 kPa gauge, MEETS target
+T020: target 0.500 L/min, delivered 0.801 L/min, inlet 0.000 kPa gauge, MEETS target
+T021: target 0.500 L/min, delivered 1.211 L/min, inlet 0.000 kPa gauge, MEETS target
+T022: target 0.500 L/min, delivered 1.125 L/min, inlet 0.000 kPa gauge, MEETS target
+T023: target 0.500 L/min, delivered 1.069 L/min, inlet 0.000 kPa gauge, MEETS target
+T024: target 0.500 L/min, delivered 1.021 L/min, inlet 0.000 kPa gauge, MEETS target
+T025: target 0.500 L/min, delivered 0.979 L/min, inlet 0.000 kPa gauge, MEETS target
+T026: target 0.500 L/min, delivered 0.903 L/min, inlet 0.000 kPa gauge, MEETS target
+T027: target 0.500 L/min, delivered 0.876 L/min, inlet 0.000 kPa gauge, MEETS target
+T028: target 0.500 L/min, delivered 0.850 L/min, inlet 0.000 kPa gauge, MEETS target
+T029: target 0.500 L/min, delivered 0.827 L/min, inlet 0.000 kPa gauge, MEETS target
+T030: target 0.500 L/min, delivered 0.806 L/min, inlet 0.000 kPa gauge, MEETS target
+T031: target 0.500 L/min, delivered 1.221 L/min, inlet 0.000 kPa gauge, MEETS target
+T032: target 0.500 L/min, delivered 1.133 L/min, inlet 0.000 kPa gauge, MEETS target
+T033: target 0.500 L/min, delivered 1.076 L/min, inlet 0.000 kPa gauge, MEETS target
+T034: target 0.500 L/min, delivered 1.027 L/min, inlet 0.000 kPa gauge, MEETS target
+T035: target 0.500 L/min, delivered 0.986 L/min, inlet 0.000 kPa gauge, MEETS target
+T036: target 0.500 L/min, delivered 0.909 L/min, inlet 0.000 kPa gauge, MEETS target
+T037: target 0.500 L/min, delivered 0.881 L/min, inlet 0.000 kPa gauge, MEETS target
+T038: target 0.500 L/min, delivered 0.856 L/min, inlet 0.000 kPa gauge, MEETS target
+T039: target 0.500 L/min, delivered 0.833 L/min, inlet 0.000 kPa gauge, MEETS target
+T040: target 0.500 L/min, delivered 0.812 L/min, inlet 0.000 kPa gauge, MEETS target
+T041: target 0.500 L/min, delivered 1.232 L/min, inlet 0.000 kPa gauge, MEETS target
+T042: target 0.500 L/min, delivered 1.142 L/min, inlet 0.000 kPa gauge, MEETS target
+T043: target 0.500 L/min, delivered 1.083 L/min, inlet 0.000 kPa gauge, MEETS target
+T044: target 0.500 L/min, delivered 1.034 L/min, inlet 0.000 kPa gauge, MEETS target
+T045: target 0.500 L/min, delivered 0.992 L/min, inlet 0.000 kPa gauge, MEETS target
+T046: target 0.500 L/min, delivered 0.915 L/min, inlet 0.000 kPa gauge, MEETS target
+T047: target 0.500 L/min, delivered 0.887 L/min, inlet 0.000 kPa gauge, MEETS target
+T048: target 0.500 L/min, delivered 0.862 L/min, inlet 0.000 kPa gauge, MEETS target
+T049: target 0.500 L/min, delivered 0.838 L/min, inlet 0.000 kPa gauge, MEETS target
+T050: target 0.500 L/min, delivered 0.817 L/min, inlet 0.000 kPa gauge, MEETS target
+T051: target 0.500 L/min, delivered 1.242 L/min, inlet 0.000 kPa gauge, MEETS target
+T052: target 0.500 L/min, delivered 1.152 L/min, inlet 0.000 kPa gauge, MEETS target
+T053: target 0.500 L/min, delivered 1.090 L/min, inlet 0.000 kPa gauge, MEETS target
+T054: target 0.500 L/min, delivered 1.041 L/min, inlet 0.000 kPa gauge, MEETS target
+T055: target 0.500 L/min, delivered 0.999 L/min, inlet 0.000 kPa gauge, MEETS target
+T056: target 0.500 L/min, delivered 0.921 L/min, inlet 0.000 kPa gauge, MEETS target
+T057: target 0.500 L/min, delivered 0.893 L/min, inlet 0.000 kPa gauge, MEETS target
+T058: target 0.500 L/min, delivered 0.867 L/min, inlet 0.000 kPa gauge, MEETS target
+T059: target 0.500 L/min, delivered 0.844 L/min, inlet 0.000 kPa gauge, MEETS target
+T060: target 0.500 L/min, delivered 0.822 L/min, inlet 0.000 kPa gauge, MEETS target
+T061: target 0.500 L/min, delivered 1.253 L/min, inlet 0.000 kPa gauge, MEETS target
+T062: target 0.500 L/min, delivered 1.162 L/min, inlet 0.000 kPa gauge, MEETS target
+T063: target 0.500 L/min, delivered 1.097 L/min, inlet 0.000 kPa gauge, MEETS target
+T064: target 0.500 L/min, delivered 1.048 L/min, inlet 0.000 kPa gauge, MEETS target
+T065: target 0.500 L/min, delivered 1.005 L/min, inlet 0.000 kPa gauge, MEETS target
+T066: target 0.500 L/min, delivered 0.928 L/min, inlet 0.000 kPa gauge, MEETS target
+T067: target 0.500 L/min, delivered 0.899 L/min, inlet 0.000 kPa gauge, MEETS target
+T068: target 0.500 L/min, delivered 0.873 L/min, inlet 0.000 kPa gauge, MEETS target
+T069: target 0.500 L/min, delivered 0.850 L/min, inlet 0.000 kPa gauge, MEETS target
+T070: target 0.500 L/min, delivered 0.828 L/min, inlet 0.000 kPa gauge, MEETS target
+T071: target 0.500 L/min, delivered 1.264 L/min, inlet 0.000 kPa gauge, MEETS target
+T072: target 0.500 L/min, delivered 1.172 L/min, inlet 0.000 kPa gauge, MEETS target
+T073: target 0.500 L/min, delivered 1.105 L/min, inlet 0.000 kPa gauge, MEETS target
+T074: target 0.500 L/min, delivered 1.055 L/min, inlet 0.000 kPa gauge, MEETS target
+T075: target 0.500 L/min, delivered 1.012 L/min, inlet 0.000 kPa gauge, MEETS target
+T076: target 0.500 L/min, delivered 0.934 L/min, inlet 0.000 kPa gauge, MEETS target
+T077: target 0.500 L/min, delivered 0.905 L/min, inlet 0.000 kPa gauge, MEETS target
+T078: target 0.500 L/min, delivered 0.879 L/min, inlet 0.000 kPa gauge, MEETS target
+T079: target 0.500 L/min, delivered 0.855 L/min, inlet 0.000 kPa gauge, MEETS target
+T080: target 0.500 L/min, delivered 0.834 L/min, inlet 0.000 kPa gauge, MEETS target
+T081: target 0.500 L/min, delivered 1.275 L/min, inlet 0.000 kPa gauge, MEETS target
+T082: target 0.500 L/min, delivered 1.182 L/min, inlet 0.000 kPa gauge, MEETS target
+T083: target 0.500 L/min, delivered 1.112 L/min, inlet 0.000 kPa gauge, MEETS target
+T084: target 0.500 L/min, delivered 1.062 L/min, inlet 0.000 kPa gauge, MEETS target
+T085: target 0.500 L/min, delivered 1.019 L/min, inlet 0.000 kPa gauge, MEETS target
+T086: target 0.500 L/min, delivered 0.940 L/min, inlet 0.000 kPa gauge, MEETS target
+T087: target 0.500 L/min, delivered 0.911 L/min, inlet 0.000 kPa gauge, MEETS target
+T088: target 0.500 L/min, delivered 0.885 L/min, inlet 0.000 kPa gauge, MEETS target
+T089: target 0.500 L/min, delivered 0.861 L/min, inlet 0.000 kPa gauge, MEETS target
+T090: target 0.500 L/min, delivered 0.839 L/min, inlet 0.000 kPa gauge, MEETS target
+T091: target 0.500 L/min, delivered 1.286 L/min, inlet 0.000 kPa gauge, MEETS target
+T092: target 0.500 L/min, delivered 1.193 L/min, inlet 0.000 kPa gauge, MEETS target
+T093: target 0.500 L/min, delivered 1.120 L/min, inlet 0.000 kPa gauge, MEETS target
+T094: target 0.500 L/min, delivered 1.069 L/min, inlet 0.000 kPa gauge, MEETS target
+T095: target 0.500 L/min, delivered 1.026 L/min, inlet 0.000 kPa gauge, MEETS target
+T096: target 0.500 L/min, delivered 0.947 L/min, inlet 0.000 kPa gauge, MEETS target
+T097: target 0.500 L/min, delivered 0.917 L/min, inlet 0.000 kPa gauge, MEETS target
+T098: target 0.500 L/min, delivered 0.891 L/min, inlet 0.000 kPa gauge, MEETS target
+T099: target 0.500 L/min, delivered 0.867 L/min, inlet 0.000 kPa gauge, MEETS target
+T100: target 0.500 L/min, delivered 0.845 L/min, inlet 0.000 kPa gauge, MEETS target

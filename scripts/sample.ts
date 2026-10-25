@@ -1,0 +1,10 @@
+import { mkdirSync,writeFileSync } from 'node:fs';
+import { createExample } from '../src/engine/model';
+import { simulate } from '../src/engine/hydraulics';
+import { engineeringReport, resultsCSV } from '../src/exports';
+const p=createExample(),r=simulate(p);
+mkdirSync('examples',{recursive:true});
+writeFileSync('examples/100-tower-project.json',JSON.stringify(p,null,2));
+writeFileSync('examples/100-tower-engineering-summary.txt',engineeringReport(p,r));
+writeFileSync('examples/100-tower-results.csv',resultsCSV(p,r));
+console.log(JSON.stringify({towers:p.towers.length,flowLmin:r.flow,headM:r.head,demandLmin:r.demand,coverage:r.coverage,minFlow:r.minFlow,maxFlow:r.maxFlow,hydraulicW:r.hydraulicW,ratedKwhDay:r.ratedKwhDay,returnCapacity:r.returnCapacity,massResidual:r.solution.residual},null,2));
