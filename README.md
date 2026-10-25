@@ -23,6 +23,10 @@ npm.cmd run preview
 
 `npm.cmd run sample` regenerates the 100-tower hydraulic example report and CSV. Installation requires internet access; simulation runs locally afterward.
 
+## Deploy on Netlify
+
+Connect this repository and use its root as the base directory. The committed `netlify.toml` sets Node.js 22, build command `npm run build`, and publish directory `dist`. Keep development dependencies enabled during installation: TypeScript, Vite and `@types/node` are build-time dependencies. The Node types are declared explicitly because `scripts/sample.ts` imports `node:fs` and is checked by the production TypeScript build.
+
 ## Features
 
 - Proposed 100-tower layout in a 10 × 10 m room, with editable dimensions, spacing, aisle, height, body diameter, and individual irrigation targets.
